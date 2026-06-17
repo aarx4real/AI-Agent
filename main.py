@@ -10,19 +10,19 @@ def main():
     model = ChatOpenAI(temperature=0)
 
     tools = []
-    agent_executer = create_react_agent(models, tools)
+    agent_executor = create_react_agent(model, tools)
 
     print("Welcome! I am your AI assistant, type 'quit' to exit.")
     print("How can I help you Today.")
 
     while True:
-        user_input = input("/nYou: ").strip()
+        user_input = input("\nYou: ").strip()
 
         if user_input=="quit":
             break
         
         print("\nAssistant: ",end="")
-        for chunk in agent_executer.stream(
+        for chunk in agent_executor.stream(
             {"messages" : [HumanMessage(content=user_input)]}
         ):
 
@@ -31,5 +31,5 @@ def main():
                     print(message.content, end="")
             print()
 
-if __name__ += "__main__":
+if __name__ == "__main__":
     main()
